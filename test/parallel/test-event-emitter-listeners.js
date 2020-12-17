@@ -24,7 +24,7 @@
 require('../common');
 const assert = require('assert');
 const events = require('events');
-
+const { kEventListener } = events;
 function listener() {}
 
 function listener2() {}
@@ -104,11 +104,11 @@ function listener4() {
   assert.strictEqual(wrappedListeners.length, 2);
   assert.strictEqual(wrappedListeners[0], listener);
   assert.notStrictEqual(wrappedListeners[1], listener);
-  assert.strictEqual(wrappedListeners[1].listener, listener);
+  assert.strictEqual(wrappedListeners[1][kEventListener], listener);
   assert.notStrictEqual(wrappedListeners, ee.rawListeners('foo'));
   ee.emit('foo');
   assert.strictEqual(wrappedListeners.length, 2);
-  assert.strictEqual(wrappedListeners[1].listener, listener);
+  assert.strictEqual(wrappedListeners[1][kEventListener], listener);
 }
 
 {
