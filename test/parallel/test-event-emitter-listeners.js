@@ -19,12 +19,13 @@
 // OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+// Flags: --expose-internals --no-warnings
 'use strict';
 
 require('../common');
 const assert = require('assert');
 const events = require('events');
-const { kEventListener } = events;
+const { kEventListener } = require('internal/util');
 
 function listener() {}
 
